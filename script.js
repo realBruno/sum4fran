@@ -57,9 +57,10 @@ botoes.forEach(botao => {
             correctBox = correctAnswer();
             console.log(correctBox);
         }
-        else
-            ;
-        /* você perdeu */
+        else {
+            alert("Resposta Errada!\nFim de jogo!");
+            location.reload();
+        }
     });
 });
 
