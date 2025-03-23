@@ -1,5 +1,7 @@
 'use strict';
 
+/* *********** GAME *********** */
+
 const number = document.querySelector(".numero");
 
 const firstRandom = parseInt(Math.random() * 10) + 1;
@@ -10,8 +12,6 @@ number.innerHTML =
     `${firstRandom} + <span class="secondNumber">${secondRandom}</span>`;
 
 let secondNumber = document.querySelector(".secondNumber").innerHTML;
-
-/* generate randomly */
 
 const game = function (first, second) { // chooses one box randomly
     const boxNumber = parseInt(Math.random() * 6) + 1;
@@ -43,9 +43,7 @@ const game = function (first, second) { // chooses one box randomly
     }
 
     return boxNumber;
-}
-
-/* *************** */
+};
 
 let correctBox = game(firstRandom, secondRandom);
 
@@ -55,7 +53,8 @@ botoes.forEach(botao => {
         const id = parseInt(botao.id);
         if (id === correctBox) {
             correctBox = correctAnswer();
-            console.log(correctBox);
+            updateScore();
+            countDown();
         }
         else {
             alert("Resposta Errada!\nFim de jogo!");
@@ -63,8 +62,6 @@ botoes.forEach(botao => {
         }
     });
 });
-
-console.log(correctBox);
 
 function correctAnswer() {
     const newNumberToShow = parseInt(Math.random() * 10) + 1;
@@ -75,6 +72,42 @@ function correctAnswer() {
 
     number.innerHTML =
         `<span class="secondNumber">${newNumberToShow}</span>`;
-    
+
     return boxNumber;
 };
+
+/* *************** TIMER *************** */
+/* 
+function countDown() {
+    let seconds = 5;
+
+    const intervalId = setInterval(() => {
+        seconds--;
+
+        document.querySelector(".segundos").innerHTML = seconds;
+
+        if (seconds <= 0) {
+            alert("Tempo Esgotado!\nFim de jogo!");
+            clearInterval(intervalId);
+            location.reload();
+            return;
+        }
+
+    }, 1000);
+
+    return;
+} */
+
+/* countDown(); */
+
+/* *********** SCORE *********** */
+
+
+function updateScore() {
+    const score = document.querySelector(".pontuacao");
+    let totalScore = parseInt(score.innerHTML);
+
+    totalScore += 5;
+
+    score.innerHTML = totalScore
+}
