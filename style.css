@@ -34,7 +34,7 @@ body {
     padding: 0.8rem;
     width: fit-content;
     max-height: 600px;
-    height: 80%;
+    height: 70%;
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -134,9 +134,8 @@ button {
     border: 0px;
 }
 
-.option1 {
+/* .option1 {
     border-radius: 20px 20px 0px 20px;
-    
 }
 
 .option2 {
@@ -157,4 +156,8 @@ button {
 
 .option6 {
     border-radius: 0px 20px 20px 20px;
+} */
+
+.option1, .option2, .option3, .option4, .option5, .option6 {
+    border-radius: 10px;
 }
