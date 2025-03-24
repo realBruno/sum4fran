@@ -118,6 +118,7 @@ body {
 button {
     background-color: transparent;
     border: 2px solid black;
+    font-weight: 700;
 }
 
 .option2, .option3, .option6 {
