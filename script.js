@@ -18,8 +18,6 @@ const game = function (first, second) { // chooses one box randomly
 
     const correctSum = first + second;
 
-    // console.log(correctSum);
-
     const correctBox = document.querySelector(`.option${boxNumber}`);
     correctBox.innerHTML = `${correctSum}`;
 
@@ -120,8 +118,6 @@ function startTimer() {
     countDown();
 }
 
-// startTimer();
-
 /* *********** SCORE *********** */
 
 function updateScore() {
@@ -133,3 +129,12 @@ function updateScore() {
 
     return score;
 }
+
+/* *************** SERVICE WORKER *************** */
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./serviceworker.js')
+      .then(reg => console.log('Service Worker registrado com sucesso!'))
+      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+  }
+  
