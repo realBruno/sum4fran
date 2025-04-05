@@ -4,12 +4,12 @@
 
 const number = document.querySelector(".numero");
 
-const firstRandom = parseInt(Math.random() * 10) + 1;
-const secondRandom = parseInt(Math.random() * 10) + 1;
+let firstRandom = parseInt(Math.random() * 10) + 1;
+let secondRandom = parseInt(Math.random() * 10) + 1;
 
 // shows a random sum on page load:
 number.innerHTML =
-`${firstRandom} + <span class="secondNumber">${secondRandom}</span>`;
+    `${firstRandom} + <span class="secondNumber">${secondRandom}</span>`;
 
 let secondNumber = document.querySelector(".secondNumber").innerHTML;
 
@@ -55,8 +55,8 @@ const botoes = document.querySelectorAll('.botao');
 if (localStorage.getItem("highest") === null)
     localStorage.setItem("highest", 0);
 else
-    document.querySelector(".maior-pontuacao").innerHTML = 
-                            localStorage.getItem("highest");
+    document.querySelector(".maior-pontuacao").innerHTML =
+        localStorage.getItem("highest");
 
 botoes.forEach(botao => {
     botao.addEventListener("click", () => {
@@ -70,7 +70,7 @@ botoes.forEach(botao => {
                 localStorage.setItem("highest", score);
 
                 document.querySelector(".maior-pontuacao").innerHTML =
-                                        localStorage.getItem("highest");
+                    localStorage.getItem("highest");
             }
 
             clearTimeout(timer);
@@ -78,7 +78,11 @@ botoes.forEach(botao => {
         }
         else {
             alert("Resposta Errada!\nFim de jogo!");
-            location.reload();
+            if (!navigator.onLine) {
+                window.location.replace(window.location.href);
+            } else {
+                location.reload();
+            }
         }
     });
 });
@@ -108,7 +112,11 @@ function startTimer() {
         if (seconds <= 0) {
             clearTimeout(timer);
             alert("Tempo Esgotado!\nFim de jogo!");
-            location.reload();
+            if (!navigator.onLine) {
+                window.location.replace(window.location.href);
+            } else {
+                location.reload();
+            }
         }
         else {
             timer = setTimeout(countDown, 1000);
@@ -132,9 +140,15 @@ function updateScore() {
 
 /* *************** SERVICE WORKER *************** */
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./serviceworker.js')
-      .then(reg => console.log('Service Worker registrado com sucesso!'))
-      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/serviceworker.js")
+        .then(registration => {
+          console.log("Service Worker registrado com sucesso:", registration.scope);
+        })
+        .catch(error => {
+          console.log("Falha ao registrar o Service Worker:", error);
+        });
+    });
   }
   

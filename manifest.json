@@ -4,7 +4,7 @@
     "description": "Made for Fran (fun)",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#4658e8",
+    "background_color": "#ffffff",
     "theme_color": "#4658e8",
     "orientation": "portrait",
     "icons": [

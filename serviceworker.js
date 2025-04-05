@@ -1,5 +1,6 @@
-const CACHE_NAME = "sum4fun-cache-v1";
+const CACHE_NAME = "sum4fran-cache-v1";
 const urlsToCache = [
+  "/",
   "/index.html",
   "/style.css",
   "/script.js",
@@ -11,30 +12,28 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", event => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
-});
-
-self.addEventListener('fetch', event => {
+  if (event.request.mode === "navigate") {
     event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request).catch(() => {
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
-          }
-        });
+      caches.match("/index.html").then(cachedResponse => {
+        return cachedResponse || fetch("/index.html");
       })
     );
-  });
-  
+  } else {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        return cached || fetch(event.request);
+      })
+    );
+  }
+});
