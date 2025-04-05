@@ -1,11 +1,11 @@
 {
-    "name": "Sum4Fun",
-    "short_name": "Sum4Fun",
+    "name": "Sum4Fran",
+    "short_name": "Sum4Fran",
     "description": "Made for Fran (fun)",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#1e90ff",
+    "background_color": "#4658e8",
+    "theme_color": "#4658e8",
     "orientation": "portrait",
     "icons": [
         {
